@@ -1,8 +1,9 @@
+define(['jquery','template','cookie'], function ($,template) {
+	// NProgress.start();
 
-	NProgress.start();
+	// NProgress.done();
 
-	NProgress.done();
-
+	// 控制左侧菜单的折叠和展开
 	$('.navs ul').prev('a').on('click', function () {
 		$(this).next().slideToggle();
 	});
@@ -29,7 +30,7 @@
 	// console.log($.cookie);
 	var flag = $.cookie('PHPSESSID');
 	//console.log(flag);
-	if(!flag){
+	if(!flag && location.pathname != '/main/login'){
 		location.href = '/main/login';
 	}
 
@@ -39,7 +40,12 @@
 	console.log(loginInfo);
 	// loginInfo 的优化
 	loginInfo = loginInfo && JSON.parse(loginInfo);
-	// 头像信息
-	$('.aside .profile img').attr('src',loginInfo.tc_avatar);
+	// 头像信息  --- 可以使用模板引擎来做
+	var tpl = '<div class="avatar img-circle"><img src="{{tc_avatar}}"></div><h4>{{tc_name}}</h4>';
+	var html = template.render(tpl,loginInfo);
+	$('.aside .profile').html(html);
+
+	//$('.aside .profile img').attr('src',loginInfo.tc_avatar);
 	// 用户名称
-	$('.aside .profile h4').html(loginInfo.tc_name);
+	//$('.aside .profile h4').html(loginInfo.tc_name);
+});
