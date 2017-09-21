@@ -37,7 +37,7 @@ define(['jquery','template','cookie'], function ($,template) {
 	// loginInfo 和保存的cookie信息的名一样
 	// 填充头像信息
 	var loginInfo = $.cookie('loginInfo');
-	console.log(loginInfo);
+	// console.log(loginInfo);
 	// loginInfo 的优化
 	loginInfo = loginInfo && JSON.parse(loginInfo);
 	// 头像信息  --- 可以使用模板引擎来做

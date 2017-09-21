@@ -8,9 +8,11 @@ require.config({
         cookie: 'jquery-cookie/jquery.cookie',
         template: 'artTemplate/template-web',
         bootstrap: 'bootstrap/js/bootstrap',
+        util: '../js/util',
         common: '../js/common',
         login: '../js/login',
-        teacherlist: '../js/teacher-list'
+        teacherlist: '../js/teacher-list',
+        teacheradd: '../js/teacher-add'
     },
     shim: {
         // bootstrap 不是标准模块，要加shim
