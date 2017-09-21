@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/20.
  */
-define(['jquery','template'],function ($,template) {
+define(['jquery','template','bootstrap'],function ($,template) {
     // 调用后台接口，获取所有讲师数据
     $.ajax({
         type: 'get',
@@ -28,7 +28,7 @@ define(['jquery','template'],function ($,template) {
                 var tcStatus = td.attr('data-status');
                 console.log(tcStatus);
 
-                // 调接口
+                // 调后台接口
                 $.ajax({
                     type: 'post',
                     url: '/api/teacher/handle',
@@ -47,8 +47,29 @@ define(['jquery','template'],function ($,template) {
                         }
                     }
                 });
+
             });
 
+            // 查看讲师
+            // 绑定事件 --> 调用接口 --> 拿到数据 --> 解析渲染 --> 填充页面
+            $('.preview').click(function () {
+                var td = $(this).closest('td');
+                var tcId = td.attr('data-tcId');
+                $.ajax({
+                    type: 'get',
+                    url: '/api/teacher/view',
+                    data: {tc_id: tcId},
+                    dataType: 'json',
+                    success: function (data) {
+                        // console.log(data);
+                        // 已获取数据,进行数据解析，渲染页面
+                        var html = template('modalTpl',data.result);
+                        $('#modalInfo').html(html);
+                        // 显示模态框（弹框）
+                        $('#teacherModal').modal();
+                    }
+                });
+            });
 
         }
 
