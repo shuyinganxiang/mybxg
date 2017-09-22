@@ -8,6 +8,9 @@ require.config({
         cookie: 'jquery-cookie/jquery.cookie',
         template: 'artTemplate/template-web',
         bootstrap: 'bootstrap/js/bootstrap',
+        datepicker: 'bootstrap-datepicker/js/bootstrap-datepicker',
+        //language: 'bootstap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
+        language: 'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
         util: '../js/util',
         common: '../js/common',
         login: '../js/login',
@@ -15,13 +18,13 @@ require.config({
         teacheradd: '../js/teacher-add'
     },
     shim: {
-        // bootstrap 不是标准模块，要加shim
-        // 给 bootstrap 加上 jQuery 的依赖
+        //  bootstrap 渚濊禆 jQuery
         bootstrap: {
-                // deps: require.js 中的一个属性，用来把非标准的模块，变成标准的模块  变的方式，就是添加一个（jQuery）依赖
+            // deps: require.js 鏂规硶裕鍙互娣诲姞渚濊禆准
             deps: ['jquery']
-
+        },
+        language: {
+            deps: ['jquery','datepicker']
         }
-
     }
 });
