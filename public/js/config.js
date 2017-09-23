@@ -13,13 +13,14 @@ require.config({
         language: 'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
         validate: 'validate/jquery-validate.min',
         form: 'jquery-form/jquery.form',
+        uploadify:'uploadify/jquery.uploadify.min',// 使用uploadify flash 插件上传头像图片
+        region: 'jquery-region/jquery.region',
         util: '../js/util',
         common: '../js/common',
         login: '../js/login',
         teacherlist: '../js/teacher-list',
         teacheradd: '../js/teacher-add',
         settings: '../js/settings'
-       // , settings: '../js/settings'
     },
     shim: {
         //  bootstrap 依赖 jQuery
@@ -31,6 +32,9 @@ require.config({
             deps: ['jquery','datepicker']
         },
         validate: {
+            deps: ['jquery']
+        },
+        uploadify:{
             deps: ['jquery']
         }
     }
