@@ -17,7 +17,9 @@ require.config({
         common: '../js/common',
         login: '../js/login',
         teacherlist: '../js/teacher-list',
-        teacheradd: '../js/teacher-add'
+        teacheradd: '../js/teacher-add',
+        settings: '../js/settings'
+       // , settings: '../js/settings'
     },
     shim: {
         //  bootstrap 依赖 jQuery
