@@ -1,7 +1,11 @@
 /**
  * Created by Administrator on 2017/9/20.
  */
-define(['jquery','template','bootstrap'],function ($,template) {
+define(['jquery','template','util','bootstrap'],function ($,template,util) {
+
+    // 左侧边栏选中高亮效果
+    util.setMenu(location.pathname);
+
     // 调用后台接口，获取所有讲师数据
     $.ajax({
         type: 'get',

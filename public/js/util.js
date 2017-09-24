@@ -22,6 +22,10 @@ define(['jquery'], function ($) {
                 //console.log(tcId);
             }
             return tcId;
+        },
+        setMenu: function (path) {
+            // 左侧边栏选中高亮效果
+            $('.aside .navs a[href="'+path+'"]').addClass('active');
         }
     }
 });
