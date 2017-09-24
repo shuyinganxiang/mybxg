@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/23.
  */
-define(['jquery','template','ckeditor','uploadify','region','datepicker','language'], function($,template,CKEDITOR) {
+define(['jquery','template','ckeditor','uploadify','region','datepicker','language','validate','form'], function($,template,CKEDITOR) {
     // 调用接口,获取所有的个人信息
     $.ajax({
         type: 'get',
@@ -40,14 +40,73 @@ define(['jquery','template','ckeditor','uploadify','region','datepicker','langua
                 url: '/public/assets/jquery-region/region.json'
             });
 
-            // 处理副文本
+            //// 处理副文本
             CKEDITOR.replace('editor',{
                 toolbarGroups: [
                     {name:'clipboard',groups:['clipboard','undo']},
                     {name:'editing',groups:['find','selection','spellchecker','editing']}
                 ]
             });
+            // 处理表单提交
+            $('#settingsForm').validate({
+                sendForm: false,// 禁止默认提交
+                valid: function () { // 通过之后调用的方法
+                    // 拼接
+                    var p = $('#p').find('option:selected').text();
+                    var c = $('#c').find('option:selected').text();
+                    var d = $('#d').find('option:selected').text();
+                    var hometown = p+'/'+c+'/'+d;
+                    console.log(hometown);
 
+                    // 更新副文本内容  instance --- 实例
+                    //for(var instance in CKEDITOR.instances){
+                    // // 把所有的实例中的updateElement方法更新一下
+                    // //把iform 中的内容更新到元素里面 --> 实现内容的更新
+                    // CKEDITOR.instances[instance].updateElement();
+                    // console.log(123);
+                    // }
+                    //console.log(CKEDITOR.instances);
+                    //for(var instance in CKEDITOR.instances){
+                    //    CKEDITOR.instances[instance].updateElement();
+                    //    console.log(1);
+                    //}
+
+                    function checkForm(){
+
+                        // 你的校验代码……
+
+                        for ( var instance in CKEDITOR.instances )
+                            CKEDITOR.instances[instance].updateElement();
+
+                        return true;
+                    }
+
+                    // 提交表单
+                    $(this).ajaxSubmit({
+                        type:'post',
+                        url:'/api/teacher/modify',
+                        data: {tc_hometown: hometown},
+                        dataType: 'json',
+                        success: function (data) {
+                            for ( var instance in CKEDITOR.instances )
+                                CKEDITOR.instances[instance].updateElement();
+
+
+                            // 控制页面刷新
+                            if(data.code==200){
+
+                                // 刷新当前页面
+                                location.reload();
+                                for(var instance in CKEDITOR.instances){
+                                    CKEDITOR.instances[instance].updateElement();
+                                    console.log(1);
+                                }
+
+                            }
+                        }
+                    });
+                }
+            });
         }
 
     });

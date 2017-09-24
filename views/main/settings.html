@@ -26,11 +26,12 @@
 
     <!-- template 模板 -->
     <script type="text/template" id="settingsTpl">
-        <form action="" class="form-horizontal">
+        <form id="settingsForm" class="form-horizontal">
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">姓名</label>
                 <div class="col-xs-5">
                     <p class="form-control-static">{{tc_name}}</p>
+                    <input type="hidden" name="tc_id" value="{{tc_id}}"/>
                 </div>
             </div>
             <div class="form-group">
@@ -60,7 +61,7 @@
                         <input type="radio" name="tc_gender" value="0" checked {{if tc_gender==0}}checked{{/if}}> 男
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="tc_gender" value="0" {{if tc_gender==1}}checked{{/if}}> 女
+                        <input type="radio" name="tc_gender" value="1" {{if tc_gender==1}}checked{{/if}}> 女
                     </label>
                 </div>
             </div>
@@ -73,13 +74,13 @@
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">籍贯</label>
                 <div class="col-xs-5" id="pcd">
-                    <select id="p" data-id="{{tc_province}}" name="" class="form-control input-sm">
+                    <select id="p" data-id="{{tc_province}}" name="tc_province" class="form-control input-sm">
                         <option value="">请选择省...</option>
                     </select>
-                    <select id="c" data-id="{{tc_city}}" name="" class="form-control input-sm">
+                    <select id="c" data-id="{{tc_city}}" name="tc_city" class="form-control input-sm">
                         <option value="">请选择市...</option>
                     </select>
-                    <select id="d" data-id="{{tc_district}}" name="" class="form-control input-sm">
+                    <select id="d" data-id="{{tc_district}}" name="tc_district" class="form-control input-sm">
                         <option value="">请选择区/县</option>
                     </select>
                 </div>
@@ -105,12 +106,12 @@
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">个人介绍</label>
                 <div class="col-xs-5 ckeditor">
-                    <textarea id="editor" name="" rows="15" class="form-control input-sm" name="tc_introduce">{{tc_introduce}}</textarea>
+                    <textarea rows="15" class="form-control input-sm" name="tc_introduce" id="editor">{{tc_introduce}}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-8">
-                    <input type="submit" value="保存" class="btn btn-success btn-sm pull-right">/>
+                    <input type="submit" value="保存" class="btn btn-success btn-sm pull-right">
                     <a href="./repass.html" class="btn btn-link btn-sm pull-right">更改密码？</a>
                 </div>
             </div>
