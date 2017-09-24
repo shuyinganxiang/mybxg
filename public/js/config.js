@@ -22,7 +22,8 @@ require.config({
         teacherlist: '../js/teacher-list',
         teacheradd: '../js/teacher-add',
         settings: '../js/settings',
-        index: '../js/index'
+        index: '../js/index',
+        courselist: '../js/course-list'
     },
     shim: {
         //  bootstrap 依赖 jQuery

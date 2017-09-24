@@ -25,7 +25,7 @@ define(['jquery'], function ($) {
         },
         setMenu: function (path) {
             // 左侧边栏选中高亮效果
-            $('.aside .navs a[href="'+path+'"]').addClass('active');
+            $('.aside .navs a[href="'+path+'"]').addClass('active').closest('ul').show();
         }
     }
 });
