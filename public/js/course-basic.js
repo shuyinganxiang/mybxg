@@ -63,17 +63,18 @@ define(['jquery','template','util','validate','form'], function ($,template,util
             $('#basicForm').validate({
                 sendForm:false,
                 valid: function () {
+                    console.log(456)
                     // 提交表单
                     $(this).ajaxSubmit({
                         type: 'post',
-                        url: 'api/course/update/basic',
+                        url: '/api/course/update/basic',
                         data: {cs_id: csId},
                         dataType: 'json',
                         success: function (data) {
                              console.log(data);
                             // 下一步跳转到封面裁切页面
                             location.href = '/course/picture?cs_id='+ data.result.cs_id;
-                            console.log(data.result.cs_id);
+                            // console.log(data.result.cs_id);
                         }
                     });
                 }
