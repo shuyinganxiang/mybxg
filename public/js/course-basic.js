@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/25.
  */
-define(['jquery','template','util'], function ($,template,util) {
+define(['jquery','template','util','validate','form'], function ($,template,util) {
     // 设置导航栏选中
     util.setMenu('/course/add');
 
@@ -58,6 +58,30 @@ define(['jquery','template','util'], function ($,template,util) {
                     }
                 });
             });
+
+            // 处理表单提交 添加 'validate','form'
+            $('#basicForm').validate({
+                sendForm:false,
+                valid: function () {
+                    // 提交表单
+                    $(this).ajaxSubmit({
+                        type: 'post',
+                        url: 'api/course/update/basic',
+                        data: {cs_id: csId},
+                        dataType: 'json',
+                        success: function (data) {
+                             console.log(data);
+                            // 下一步跳转到封面裁切页面
+                            location.href = '/course/picture?cs_id='+ data.result.cs_id;
+                            console.log(data.result.cs_id);
+                        }
+                    });
+                }
+            });
+
+
         }
     });
+
+
 });
