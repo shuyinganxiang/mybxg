@@ -19,6 +19,11 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
             var html = template('pictureTpl', data.result);
             $('#pictureInfo').html(html);
 
+            // 选中图片 (要裁的图片)
+            var img = $('.preview img');
+            // 为了使页面只有一个实例，定义nowCorp
+            var nowCorp = null;
+
             // 处理封面上传操作  添加依赖 uploadify
             $('#myfile').uploadify({
                 width: 80,
@@ -35,11 +40,12 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
                     // console.log(b);
                     var obj = JSON.parse(b); // 把字符串转成json格式
                     $('.preview img').attr('src', obj.result.path); // 将图片路径放进图片区域的属性中
+                    // 当图片上传成功时，直接出现图片裁切框，按钮显示保存图片
+                    cropImg();
+                    $('#cropBtn').text('保存图片').attr('data-flag',true);
                 }
             });
 
-            // 选中图片 (要裁的图片)
-            var img = $('.preview img');
 
             // 图片裁切功能
             $('#cropBtn').click(function () {
@@ -77,6 +83,11 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
                     // setSelect: [100,100,200,100]
                 }, function () {
                     //console.log(11);
+                    // 销毁当前的实例 -- 使用短路运算，第一次执行没有实例
+                    nowCorp && nowCorp.destory(); // 保证裁切实例的唯一性
+                    // nowCorp 就表示当前的实例对象  当cropImg 方法被调用的时候 nowCorp 里面就有值了
+                    nowCorp = this;
+
                     // 清空裁切图中的图片
                     $('.thumb').html('');
                     // 显示缩略图 缩略图的宽和高
@@ -104,7 +115,7 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
                 // 监控选取的变化
                 //img.parent().on('cropstart cropmove cropend',function(a,b,c) {
                 img.parent().on('cropstart cropmove cropend', function (a, b, c) {
-                    console.log(c);  // 未打印出来，不报错
+                    // console.log(c);  // 未打印出来，不报错
                     // 选取完成和变化的时候把对应的坐标数据填充到表单里 --> 下一步要提交表单，将表单提交给后台的的接口
                     var aInput = $('#cropForm').find('input');
                     aInput.eq(0).val(c.x);
