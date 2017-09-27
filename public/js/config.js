@@ -16,6 +16,8 @@ require.config({
         uploadify:'uploadify/jquery.uploadify.min',// 使用uploadify flash 插件上传头像图片
         region: 'jquery-region/jquery.region',
         ckeditor:'ckeditor/ckeditor',
+        jcrop:'jcrop/js/Jcrop',
+
         util: '../js/util',
         common: '../js/common',
         login: '../js/login',
@@ -26,7 +28,8 @@ require.config({
         courselist: '../js/course-list',
         courseadd: '../js/course-add',
         coursebasic: '../js/course-basic',
-        coursepicture: '../js/course-picture'
+        coursepicture: '../js/course-picture',
+        curselesson: '../js/course-lesson'
     },
     shim: {
         //  bootstrap 依赖 jQuery
@@ -45,6 +48,9 @@ require.config({
         },
         ckeditor:{
             exports: 'CKEDITOR'
+        },
+        jcrop: {
+            deps: ['jquery']
         }
     }
 });
