@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/27.
  */
-define(['jquery','template','util','bootstrap'], function ($,template,util) {
+define(['jquery','template','util','bootstrap','form'], function ($,template,util) {
     // 设置导航选中
     util.setMenu('/course/add');
 
@@ -26,6 +26,21 @@ define(['jquery','template','util','bootstrap'], function ($,template,util) {
                 $('#modaInfo').html(html);
                 // 1、显示弹窗 --->引入bootstrap 因为是jQuery插件，基于jQuery做的
                 $('#chapterModal').modal();
+                // 处理添加课时的表单提交 --> 引入表单提交插件 form
+                // 先把之前绑定的事件取消，然后重新绑定   .unbind('click')
+                $('#addOrEditBtn').click(function () {
+                    $('#lessonForm').ajaxSubmit({
+                        type: 'post',
+                        url: '/api/course/chapter/add',
+                        data:{ct_cs_id: csId},
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.code==200){
+                                location.reload();
+                            }
+                        }
+                    });
+                });
             });
             // 处理课程编辑操作
             $('.editLesson').click(function () {
@@ -33,7 +48,7 @@ define(['jquery','template','util','bootstrap'], function ($,template,util) {
                 var ctId = $(this).attr('data-ctId');
                 $.ajax({
                     type: 'get',
-                    url: '/pai/cuorse/chapter/edit',
+                    url: '/api/course/chapter/edit',
                     data: {ct_id: ctId},
                     dataType: 'json',
                     success:function(data){
@@ -44,11 +59,27 @@ define(['jquery','template','util','bootstrap'], function ($,template,util) {
                         $('#modaInfo').html(html);
                         // 显示模态框
                         $('#chapterModal').modal();
+                        // 处理编辑课时的表单提交  .unbind('click')
+                        $('#addOrEditBtn').click(function () {
+                            $('#lessonForm').ajaxSubmit({
+                                type: 'post',
+                                url: '/api/course/chapter/modify',
+                                data:{ct_cs_id: csId,ct_id: ctId},
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.code==200){
+                                        location.reload();
+                                    }
+                                }
+                            });
+                        });
                     }
                 });
 
 
             });
+            // 处理添加和编辑讲师的表单提交
+
         }
     });
 
