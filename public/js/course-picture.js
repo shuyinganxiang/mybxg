@@ -111,6 +111,13 @@ define(['jquery', 'template', 'util', 'uploadify', 'jcrop','form'], function ($,
                     // 3、创建一个选取
                     this.newSelection();
                     this.setSelect([x, y, w, h]);
+
+                    // 设置缩略图位置
+                    $('.jcrop-thumb').css({
+                        position:'absolute',
+                        top:0,
+                        left:0
+                    });
                 });
                 // 监控选取的变化
                 //img.parent().on('cropstart cropmove cropend',function(a,b,c) {
