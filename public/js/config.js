@@ -17,6 +17,7 @@ require.config({
         region: 'jquery-region/jquery.region',
         ckeditor:'ckeditor/ckeditor',
         jcrop:'jcrop/js/Jcrop',
+        echarts: 'echarts/echarts.min',
 
         util: '../js/util',
         common: '../js/common',
@@ -29,7 +30,8 @@ require.config({
         courseadd: '../js/course-add',
         coursebasic: '../js/course-basic',
         coursepicture: '../js/course-picture',
-        curselesson: '../js/course-lesson'
+        curselesson: '../js/course-lesson',
+        state: '../js/state'
     },
     shim: {
         //  bootstrap 依赖 jQuery

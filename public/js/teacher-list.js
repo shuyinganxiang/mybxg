@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/20.
  */
-define(['jquery','template','util','bootstrap'],function ($,template,util) {
+define(['jquery','template','util','bootstrap','state'],function ($,template,util) {
 
     // 左侧边栏选中高亮效果
     util.setMenu(location.pathname);
